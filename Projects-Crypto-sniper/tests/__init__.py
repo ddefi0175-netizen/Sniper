@@ -1,0 +1,3 @@
+"""
+Crypto Sniper test suite.
+"""

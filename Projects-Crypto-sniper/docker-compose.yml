@@ -1,0 +1,140 @@
+# Crypto Sniper - Docker Compose
+# Usage: docker-compose up -d
+
+version: '3.8'
+
+services:
+  # ============================================================
+  # Main Application
+  # ============================================================
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: crypto-sniper-app
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONPATH=/app
+      - DATABASE_URL=postgresql://sniper:sniper@db:5432/sniper
+      - REDIS_URL=redis://redis:6379/0
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - sniper-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # ============================================================
+  # PostgreSQL Database
+  # ============================================================
+  db:
+    image: postgres:15-alpine
+    container_name: crypto-sniper-db
+    environment:
+      POSTGRES_USER: sniper
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-sniper_dev_password}
+      POSTGRES_DB: sniper
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    networks:
+      - sniper-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sniper -d sniper"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ============================================================
+  # Redis Cache
+  # ============================================================
+  redis:
+    image: redis:7-alpine
+    container_name: crypto-sniper-redis
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-sniper_redis_dev}
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    networks:
+      - sniper-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ============================================================
+  # Celery Worker (Background Tasks)
+  # ============================================================
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: crypto-sniper-worker
+    command: celery -A backend.tasks worker --loglevel=info
+    environment:
+      - PYTHONPATH=/app
+      - DATABASE_URL=postgresql://sniper:sniper@db:5432/sniper
+      - REDIS_URL=redis://redis:6379/0
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+      - app
+    restart: unless-stopped
+    networks:
+      - sniper-network
+
+  # ============================================================
+  # Celery Beat (Scheduled Tasks)
+  # ============================================================
+  scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: crypto-sniper-scheduler
+    command: celery -A backend.tasks beat --loglevel=info
+    environment:
+      - PYTHONPATH=/app
+      - DATABASE_URL=postgresql://sniper:sniper@db:5432/sniper
+      - REDIS_URL=redis://redis:6379/0
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+      - worker
+    restart: unless-stopped
+    networks:
+      - sniper-network
+
+# ============================================================
+# Networks
+# ============================================================
+networks:
+  sniper-network:
+    driver: bridge
+
+# ============================================================
+# Volumes
+# ============================================================
+volumes:
+  postgres_data:
+  redis_data:
