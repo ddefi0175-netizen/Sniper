@@ -5,12 +5,15 @@ Provides automated portfolio rebalancing to maintain target allocations.
 """
 
 import logging
-from typing import List, Dict, Optional, Any
+from typing import List, Dict, Optional, Any, TYPE_CHECKING
 from dataclasses import dataclass, field
 from decimal import Decimal
 from enum import Enum
 
 from web3 import Web3
+
+if TYPE_CHECKING:
+    pass  # Type hints only
 
 logger = logging.getLogger(__name__)
 
@@ -194,7 +197,11 @@ class RebalanceManager:
         Returns:
             List of current holdings
         """
-        from wallet.wallet_integration import WalletManager
+        try:
+            from wallet.wallet_integration import WalletManager  # type: ignore
+        except ImportError:
+            # Fallback import path
+            from backend_wallet_wallet_integration import WalletManager  # type: ignore
         
         wallet = WalletManager(default_network=self.network)
         wallet_address = Web3.to_checksum_address(wallet_address)

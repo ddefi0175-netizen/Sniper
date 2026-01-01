@@ -34,7 +34,7 @@ pytest -n auto
 
 ## Test Structure
 
-```
+```text
 tests/
 ├── conftest.py          # Shared fixtures
 ├── test_auth.py         # Authentication tests
