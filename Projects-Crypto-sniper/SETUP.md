@@ -177,7 +177,7 @@ uvicorn backend.ai_predict:app --reload --port 8000
 
 ## Production Setup
 
-### Prerequisites
+### Production Prerequisites
 
 - Ubuntu 20.04+ or similar
 - Python 3.10+
@@ -186,7 +186,7 @@ uvicorn backend.ai_predict:app --reload --port 8000
 - Nginx (for reverse proxy)
 - SSL certificate
 
-### Step-by-Step
+### Production Step-by-Step
 
 #### 1. System Setup
 
@@ -417,7 +417,7 @@ docker run -d \
 ### Required Variables
 
 | Variable | Description | Example |
-|----------|-------------|---------|
+| -------- | ----------- | ------- |
 | `INFURA_API_KEY` | Infura API key | `abc123...` |
 | `ALCHEMY_API_KEY` | Alchemy API key | `xyz789...` |
 | `JWT_SECRET_KEY` | JWT signing secret (32+ chars) | `your_secure_random_key` |
@@ -425,7 +425,7 @@ docker run -d \
 ### Optional Variables
 
 | Variable | Description | Default |
-|----------|-------------|---------|
+| -------- | ----------- | ------- |
 | `DATABASE_URL` | Database connection | `sqlite:///./app.db` |
 | `REDIS_URL` | Redis connection | `redis://localhost:6379/0` |
 | `DEBUG` | Enable debug mode | `False` |
@@ -458,7 +458,7 @@ docker run -d \
 Default networks are configured in `config/networks.py`:
 
 | Network | Chain ID | Type |
-|---------|----------|------|
+| ------- | -------- | ---- |
 | ethereum | 1 | Mainnet |
 | goerli | 5 | Testnet |
 | sepolia | 11155111 | Testnet |
@@ -493,7 +493,7 @@ NetworkConfig(
 
 #### ModuleNotFoundError
 
-```
+```text
 ModuleNotFoundError: No module named 'web3'
 ```
 
@@ -505,7 +505,7 @@ pip install -r requirements.txt
 
 #### Connection Error
 
-```
+```text
 ConnectionError: Could not connect to RPC
 ```
 
@@ -517,7 +517,7 @@ ConnectionError: Could not connect to RPC
 
 #### JWT Error
 
-```
+```text
 jwt.exceptions.InvalidSignatureError
 ```
 
@@ -529,7 +529,7 @@ jwt.exceptions.InvalidSignatureError
 
 #### Import Error
 
-```
+```text
 ImportError: cannot import name 'encode_defunct'
 ```
 

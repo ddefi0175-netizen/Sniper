@@ -143,7 +143,7 @@ def transfer_tokens(
 
 ### Branch Naming
 
-```
+```text
 feat/add-nft-support       # New feature
 fix/wallet-balance-bug     # Bug fix
 docs/update-readme         # Documentation
@@ -156,7 +156,7 @@ chore/update-deps          # Maintenance
 
 Follow [Conventional Commits](https://www.conventionalcommits.org/):
 
-```
+```text
 <type>(<scope>): <description>
 
 [optional body]
@@ -377,7 +377,7 @@ Any other relevant info
 
 ## 📞 Contact
 
-- **Discord**: [Join our server](#)
+- **Discord**: [Join our server](https://discord.gg/cryptosniper)
 - **Email**: <contributors@example.com>
 - **GitHub Discussions**: For questions and ideas
 

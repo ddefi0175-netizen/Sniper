@@ -17,7 +17,7 @@ on:
   pull_request:
     branches: [ "Crypto-sniper" ]
   schedule:
-    - cron: '39 2 * * 6'
+    - cron: '39 2 1 * *'
 
 jobs:
   analyze:

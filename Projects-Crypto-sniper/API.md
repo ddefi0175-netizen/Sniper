@@ -59,7 +59,7 @@ is_valid = auth.verify_signature(
 **Parameters:**
 
 | Name | Type | Description |
-|------|------|-------------|
+| --- | --- | --- |
 | address | str | Wallet address that signed |
 | message | str | Original message |
 | signature | str | Signature hex string |
@@ -80,7 +80,7 @@ token = auth.create_token("0x742d35Cc6634C0532925a3b844Bc454e4438f44e")
 **Parameters:**
 
 | Name | Type | Description |
-|------|------|-------------|
+| --- | --- | --- |
 | wallet_address | str | Authenticated wallet address |
 
 **Returns:** `str` - JWT token string
@@ -100,7 +100,7 @@ if result.authenticated:
 **Parameters:**
 
 | Name | Type | Description |
-|------|------|-------------|
+| --- | --- | --- |
 | token | str | JWT token to verify |
 
 **Returns:** `AuthResult` dataclass with:
@@ -135,13 +135,13 @@ manager = SmartContractManager(
 #### Constructor Parameters
 
 | Name | Type | Default | Description |
-|------|------|---------|-------------|
+| --- | --- | --- | --- |
 | network | str | "ethereum" | Network name |
 | private_key | str | None | For signing transactions |
 
 ---
 
-#### Methods
+#### SmartContractManager Methods
 
 ##### `load_contract(address, abi)`
 
@@ -157,7 +157,7 @@ contract = manager.load_contract(
 **Parameters:**
 
 | Name | Type | Description |
-|------|------|-------------|
+| --- | --- | --- |
 | address | str | Contract address |
 | abi | list | Contract ABI |
 
@@ -181,7 +181,7 @@ decimals = manager.read_contract(contract, "decimals")
 **Parameters:**
 
 | Name | Type | Description |
-|------|------|-------------|
+| --- | --- | --- |
 | contract | Contract | Contract instance |
 | function_name | str | Function to call |
 | *args | Any | Function arguments |
@@ -210,7 +210,7 @@ if result.success:
 **Parameters:**
 
 | Name | Type | Default | Description |
-|------|------|---------|-------------|
+| --- | --- | --- | --- |
 | contract | Contract | - | Contract instance |
 | function_name | str | - | Function to call |
 | *args | Any | - | Function arguments |
@@ -274,7 +274,7 @@ from wallet.wallet_integration import WalletManager
 wallet = WalletManager(default_network="ethereum")
 ```
 
-#### Methods
+#### WalletManager Methods
 
 ##### `get_wallet_info(address)`
 
@@ -400,7 +400,7 @@ from realtime.websocket_handler import WebSocketManager
 ws_manager = WebSocketManager()
 ```
 
-#### Methods
+#### WebSocketManager Methods
 
 ##### `connect(uri)`
 
@@ -449,7 +449,7 @@ from realtime.price_feed import PriceFeed
 feed = PriceFeed()
 ```
 
-#### Methods
+#### PriceFeed Methods
 
 ##### `get_price(symbol)`
 
@@ -499,7 +499,7 @@ from realtime.transaction_monitor import TransactionMonitor
 monitor = TransactionMonitor(network="ethereum")
 ```
 
-#### Methods
+#### TransactionMonitor Methods
 
 ##### `watch_address(address, callback)`
 
@@ -539,7 +539,7 @@ from staking.staking_manager import StakingManager
 staking = StakingManager(network="ethereum")
 ```
 
-#### Methods
+#### StakingManager Methods
 
 ##### `get_pools()`
 
@@ -659,7 +659,7 @@ dao = DAOManager(
 )
 ```
 
-#### Methods
+#### DAOManager Methods
 
 ##### `get_proposals(status=None)`
 
@@ -715,7 +715,7 @@ voting = VotingManager(
 )
 ```
 
-#### Methods
+#### VotingManager Methods
 
 ##### `vote(proposal_id, support, private_key)`
 
@@ -869,7 +869,7 @@ except NetworkError as e:
 ## Supported Networks
 
 | Network | Chain ID | Native | Testnet |
-|---------|----------|--------|---------|
+| --- | --- | --- | --- |
 | ethereum | 1 | ETH | ✗ |
 | goerli | 5 | ETH | ✓ |
 | sepolia | 11155111 | ETH | ✓ |

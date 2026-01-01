@@ -11,7 +11,7 @@
 ## 🌟 Features
 
 | Module | Description |
-|--------|-------------|
+| ------ | ----------- |
 | 🔐 **Wallet Authentication** | Web3 signature-based auth with JWT tokens |
 | 📜 **Smart Contracts** | Read/write contract interactions with event subscriptions |
 | 💰 **Multi-Chain Wallet** | Balance tracking, ENS support, ERC20 operations |
@@ -26,7 +26,7 @@
 ## 🔗 Supported Networks
 
 | Network | Chain ID | Type |
-|---------|----------|------|
+| ------- | -------- | ---- |
 | Ethereum | 1 | Mainnet |
 | BNB Smart Chain | 56 | Mainnet |
 | Polygon | 137 | Mainnet |
@@ -123,7 +123,7 @@ if result.success:
 **Methods:**
 
 | Method | Description | Returns |
-|--------|-------------|---------|
+| ------ | ----------- | ------- |
 | `generate_nonce(address)` | Create unique nonce for signing | `str` |
 | `get_sign_message(address, nonce)` | Get message to be signed | `str` |
 | `verify_signature(address, signature)` | Verify and authenticate | `AuthResult` |
@@ -172,7 +172,7 @@ print(f"TX Hash: {result.tx_hash}")
 **Methods:**
 
 | Method | Description | Returns |
-|--------|-------------|---------|
+| ------ | ----------- | ------- |
 | `load_contract(address, abi)` | Load contract instance | `Contract` |
 | `read_contract(contract, func, *args)` | Call view function | `ContractCall` |
 | `write_contract(contract, func, *args)` | Execute transaction | `ContractCall` |
@@ -216,7 +216,7 @@ print(f"Gas: {gas['gas_price_gwei']} Gwei")
 **Methods:**
 
 | Method | Description | Returns |
-|--------|-------------|---------|
+| ------ | ----------- | ------- |
 | `get_wallet_info(address)` | Full wallet details | `WalletInfo` |
 | `get_native_balance(address)` | Native token balance | `Decimal` |
 | `get_token_balance(wallet, token)` | ERC20 balance | `Decimal` |
@@ -335,7 +335,7 @@ staking.exit_pool(pool_id, contract_address)
 **Methods:**
 
 | Method | Description | Returns |
-|--------|-------------|---------|
+| ------ | ----------- | ------- |
 | `register_pool(...)` | Add staking pool | `PoolInfo` |
 | `stake(pool_id, address, amount)` | Stake tokens | `Dict` |
 | `unstake(pool_id, address, amount)` | Withdraw stake | `Dict` |
@@ -496,7 +496,7 @@ result = response.json()
 
 ## 📁 Project Structure
 
-```
+```text
 crypto-sniper/
 ├── config/
 │   ├── __init__.py
@@ -587,5 +587,5 @@ This software is for educational purposes. Cryptocurrency trading involves subst
 ## 📞 Support
 
 - 📧 Email: <support@example.com>
-- 💬 Discord: [Join Server](#)
+- 💬 Discord: [Join Server](https://discord.gg/cryptosniper)
 - 🐛 Issues: [GitHub Issues](https://github.com/yourusername/crypto-sniper/issues)
